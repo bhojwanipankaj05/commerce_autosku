@@ -79,7 +79,7 @@ function commerce_autosku_entity_prepare_view($entity_type_id, array $entities, 
  * Implements hook_ENTITY_TYPE_presave().
  */
 function commerce_autosku_commerce_product_variation_presave(EntityInterface $entity) {
-  if ($entity instanceof ContentEntityInterface) {
+  if ($entity instanceof ContentEntityInterface && $entity->hasField('sku')) {
     $decorator = \Drupal::service('commerce_autosku.entity_decorator');
     /** @var \Drupal\commerce_autosku\CommerceAutoSkuManager $decorated_entity */
     $decorated_entity = $decorator->decorate($entity);
