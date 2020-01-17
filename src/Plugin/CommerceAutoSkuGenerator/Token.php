@@ -11,6 +11,7 @@ use Drupal\commerce_product\Entity\ProductVariationInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Provides the token commerce_autosku generator.
@@ -95,11 +96,14 @@ class Token extends CommerceAutoSkuGeneratorBase {
   public function getSku(ProductVariationInterface $entity) {
     $entity_type = $entity->getEntityTypeId();
     $configuration = $this->getConfiguration();
-
-    return $this->token->replace($configuration['pattern'], [$entity_type => $entity], [
+    // Pass empty BubbleableMetadata object to explicitly ignore cacheablity,
+    // as the result is never rendered.
+    $sku = $this->token->replace($configuration['pattern'], [$entity_type => $entity], [
       'sanitize' => FALSE,
       'clear' => TRUE
-    ]);
+    ], new BubbleableMetadata());
+
+    return $sku;
   }
 
   /**
