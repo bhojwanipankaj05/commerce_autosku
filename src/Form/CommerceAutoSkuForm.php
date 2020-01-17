@@ -109,7 +109,7 @@ class CommerceAutoSkuForm extends FormBase {
     // By default, render the form using system-config-form.html.twig.
     $form['#theme'] = 'system_config_form';
 
-    if (!is_null($configuration['plugin']) && !isset($plugins[$configuration['plugin']])) {
+    if (!empty($configuration['plugin']) && !isset($plugins[$configuration['plugin']])) {
       return $form;
     }
 
@@ -125,7 +125,7 @@ class CommerceAutoSkuForm extends FormBase {
         'wrapper' => $wrapper_id,
       ],
     ];
-    if (!is_null($configuration['plugin']) && isset($plugins[$configuration['plugin']])) {
+    if (!empty($configuration['plugin']) && isset($plugins[$configuration['plugin']])) {
       $form['plugin']['#default_value'] = $configuration['plugin'];
       $form['configuration'] = [
         '#type' => 'commerce_plugin_configuration',
