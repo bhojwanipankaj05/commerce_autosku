@@ -166,8 +166,8 @@ class CommerceAutoSkuManager implements CommerceAutoSkuManagerInterface {
    */
   public function autoSkuNeeded() {
     $not_applied = empty($this->auto_sku_applied);
-    $required = $this->hasAutoSku();
-    $optional = $this->hasOptionalAutoSku() && empty($this->entity->label());
+    $required = $this->hasAutoSku() && ($this->entity->getSku() == '%AutoSku%');
+    $optional = $this->hasOptionalAutoSku() && empty($this->entity->getSku());
     return $not_applied && ($required || $optional);
   }
 
