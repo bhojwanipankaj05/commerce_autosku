@@ -3,11 +3,10 @@
 namespace Drupal\commerce_autosku\Plugin\CommerceAutoSkuGenerator;
 
 use Drupal\commerce_product\Entity\ProductVariationInterface;
-use Drupal\Component\Plugin\ConfigurablePluginInterface;
+use Drupal\Component\Plugin\ConfigurableInterface;
+use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Component\Plugin\DerivativeInspectionInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
-use Drupal\Core\Form\BaseFormIdInterface;
-use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
@@ -17,7 +16,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
  * administrator. This configuration is stored in the commerce_checkout_flow
  * config entity and injected into the plugin at instantiation.
  */
-interface CommerceAutoSkuGeneratorInterface extends  ConfigurablePluginInterface, PluginFormInterface, PluginInspectionInterface, DerivativeInspectionInterface {
+interface CommerceAutoSkuGeneratorInterface extends  ConfigurableInterface, PluginFormInterface, PluginInspectionInterface, DerivativeInspectionInterface, DependentPluginInterface {
 
   /**
    * Generated SKU getter.
