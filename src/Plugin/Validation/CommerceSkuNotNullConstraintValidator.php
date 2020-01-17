@@ -21,6 +21,7 @@ class CommerceSkuNotNullConstraintValidator extends NotNullConstraintValidator {
     if ($typed_data instanceof FieldItemList && $typed_data->isEmpty()) {
       $entity = $typed_data->getEntity();
       if (!$entity->hasField('sku')) {
+        parent::validate($value, $constraint);
         return;
       }
       $decorator = \Drupal::service('commerce_autosku.entity_decorator');
