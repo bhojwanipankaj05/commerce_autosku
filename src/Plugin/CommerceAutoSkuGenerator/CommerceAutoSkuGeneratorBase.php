@@ -5,7 +5,6 @@ namespace Drupal\commerce_autosku\Plugin\CommerceAutoSkuGenerator;
 use Drupal\commerce_product\Entity\ProductVariationInterface;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -57,9 +56,9 @@ abstract class CommerceAutoSkuGeneratorBase extends PluginBase  implements Comme
     $output = $generated_sku;
     $i = 0;
     while (!$this->isUnique($entity, $output)) {
-      $counter_length = Unicode::strlen($i) + 1;
+      $counter_length = mb_strlen($i) + 1;
       $un_prefixed_max_length = 255 - $counter_length;
-      $sku = Unicode::substr($generated_sku, 0, $un_prefixed_max_length);
+      $sku = mb_strlen($generated_sku, 0, $un_prefixed_max_length);
       $output = $sku . '_' . $i;
       $i++;
     };
