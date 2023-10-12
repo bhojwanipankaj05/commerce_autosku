@@ -98,8 +98,10 @@ class CommerceAutoSkuManager implements CommerceAutoSkuManagerInterface {
 
     $entity_type_id = $entity->getEntityTypeId();
     $bundle_id = $entity->bundle();
-    $bundle_entity_type_id = $entity_type_manager->getDefinition($entity_type_id)->getBundleEntityType();
-    $this->bundle_entity_type = $this->entityTypeManager->getStorage($bundle_entity_type_id)->load($bundle_id);
+    if ($bundle_entity_type_id = $entity_type_manager->getDefinition($entity_type_id)->getBundleEntityType()) {
+      $this->bundle_entity_type = $this->entityTypeManager->getStorage($bundle_entity_type_id)
+        ->load($bundle_id);
+    }
 
 
   }
@@ -199,7 +201,7 @@ class CommerceAutoSkuManager implements CommerceAutoSkuManagerInterface {
    * @return bool|mixed
    */
   protected function getConfig($key) {
-    $config = $this->bundle_entity_type->getThirdPartySettings('commerce_autosku');
+    $config = $this->bundle_entity_type ? $this->bundle_entity_type->geThirdPartySettings('commerce_autosku') : [];
     return isset($config[$key]) ? $config[$key] : FALSE;
   }
 
