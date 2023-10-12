@@ -58,7 +58,7 @@ abstract class CommerceAutoSkuGeneratorBase extends PluginBase  implements Comme
     while (!$this->isUnique($entity, $output)) {
       $counter_length = mb_strlen($i) + 1;
       $un_prefixed_max_length = 255 - $counter_length;
-      $sku = mb_strlen($generated_sku, 0, $un_prefixed_max_length);
+      $sku = mb_substr($generated_sku, 0, $un_prefixed_max_length);
       $output = $sku . '_' . $i;
       $i++;
     };
