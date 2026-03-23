@@ -201,7 +201,7 @@ class CommerceAutoSkuManager implements CommerceAutoSkuManagerInterface {
    * @return bool|mixed
    */
   protected function getConfig($key) {
-    $config = $this->bundle_entity_type ? $this->bundle_entity_type->geThirdPartySettings('commerce_autosku') : [];
+    $config = $this->bundle_entity_type ? $this->bundle_entity_type->getThirdPartySettings('commerce_autosku') : [];
     return isset($config[$key]) ? $config[$key] : FALSE;
   }
 
