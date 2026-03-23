@@ -6,8 +6,5 @@
   "minimum-stability": "dev",
   "require": {
     "ext-mbstring": "*"
-  },
-  "replace": {
-    "drupal/commerce_autosku": "*"
   }
 }
